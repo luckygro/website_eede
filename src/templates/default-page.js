@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Contact from '../components/contact'
 import Img from 'gatsby-image'
 import { graphql } from "gatsby"
 import Layout from '../components/layout'
 import styled from 'styled-components'
-import ReactMarkdown from 'react-markdown'
-
+import Remarkable from 'remarkable'
 
 // Styled Components
 
@@ -25,10 +24,15 @@ const Heading = styled.h1`
 
 // render
 
+var md = new Remarkable({
+  html: true,
+  breaks: true
+});
+
 const Contacts = ({contacts}) => (
   <div>
     {contacts.map(singlecontact => (
-      <Contact node={singlecontact} />
+      <Contact key={singlecontact.name} node={singlecontact} />
     ))}
   </div>
 );
@@ -42,6 +46,7 @@ class DefaultPage extends Component {
       body,
       contact,
       heroImage,
+      bodyhtml = md.render(body.body),
       isContact = contact && contact.length,
       isImage = heroImage,
     } = this.props.data.contentfulDefaultPage
@@ -58,7 +63,7 @@ class DefaultPage extends Component {
           : null
         }
 
-        <Article><ReactMarkdown source={body.body} /></Article>
+        <Article dangerouslySetInnerHTML={{__html: bodyhtml}}/>
 
         { isContact
           ? <Contacts contacts={contact} />
@@ -70,8 +75,8 @@ class DefaultPage extends Component {
   }
 }
 
-DefaultPage.PropTypes = {
-  data: PropTypes.object.isRequired
+DefaultPage.propTypes = {
+  data: propTypes.object.isRequired
 }
 
 export default DefaultPage

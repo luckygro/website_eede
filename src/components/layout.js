@@ -15,6 +15,10 @@ const Footer = styled.div`
   background-color: #333;
   padding: 60px 0;
   overflow: auto;
+
+  p {
+    color: #999;
+  }
 `;
 
 const Container = styled.div`
@@ -27,6 +31,10 @@ const Container = styled.div`
   color: #999;
   font-family: Roboto, Arial;
   font-weight: normal;
+
+  @media only screen and (max-width 1024px) {
+    width: 95%;
+  }
 `;
 
 const Separator = styled.hr `
