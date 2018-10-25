@@ -6,4 +6,4 @@ deploy:
   token: $FIREBASE_TOKEN
   skip_cleanup: true
 script:
-  - "gatsby build"
+  - "npm run build"
