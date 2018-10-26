@@ -6,4 +6,5 @@ deploy:
   token: $FIREBASE_TOKEN
   skip_cleanup: true
 script:
+  - "npm install"
   - "npm run build"
