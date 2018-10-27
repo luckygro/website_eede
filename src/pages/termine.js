@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import styled from 'styled-components'
 import Termin from '../components/termin'
 
-// Styled Components
+// Styled Component
 
 
 const Heading = styled.h1`

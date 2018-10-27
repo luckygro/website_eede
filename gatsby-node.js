@@ -6,7 +6,7 @@
 
  // You can delete this file if you're not using it
 
-const Promise = require('bluebird')
+/** const Promise = require('bluebird')
 const path = require('path')
 
 exports.createPages = ({ graphql, actions }) => {
@@ -28,7 +28,7 @@ exports.createPages = ({ graphql, actions }) => {
          }
        }
      `).then((result) => {
-       if (result.errors) {
+       if (!result.errors) {
          reject(result.errors)
        }
        result.data.allContentfulDefaultPage.edges.forEach((edge) => {
@@ -46,3 +46,5 @@ exports.createPages = ({ graphql, actions }) => {
 
  })
 }
+
+*/

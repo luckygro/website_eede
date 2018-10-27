@@ -8,13 +8,6 @@ import { faCalendarAlt, faClock, faMapMarker } from '@fortawesome/free-solid-svg
 
 // Styled Components
 
-
-const Separator = styled.hr`
-  width: 25%;
-  display: inline-block;
-  border: #E31718 1px solid;
-`
-
 const TerminBox = styled.div`
   font-family: 'Roboto', 'Arial' !important;
   overflow: hidden;

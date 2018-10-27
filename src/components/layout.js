@@ -60,10 +60,7 @@ const ExternalLink = styled.a`
 
 const Content = styled(Container)`
   color: #333;
-`;
-
-
-
+`
 
 
 // render
@@ -116,6 +113,7 @@ const Layout = ({ children }) => (
 
 Layout.propTypes = {
   children: propTypes.node.isRequired,
+  module: propTypes.node,
 }
 
 export default Layout
