@@ -24,7 +24,8 @@
     "react-motion": "^0.5.2",
     "react-responsive": "^5.0.0",
     "remarkable": "^1.7.1",
-    "styled-components": "^4.0.0"
+    "styled-components": "^4.0.0",
+    "travis-ci": "^2.2.0"
   },
   "keywords": [
     "gatsby"
