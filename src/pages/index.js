@@ -73,7 +73,7 @@ export const pageQuery = graphql`
           url
         }
         sizes(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulSizes_tracedSVG
+          ...GatsbyContentfulSizes
         }
       }
     }
