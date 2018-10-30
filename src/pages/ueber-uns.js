@@ -20,16 +20,6 @@ const Heading = styled.h1`
   font-weight: normal;
 `;
 
-const ModuleBox = styled.div`
-  overflow: hidden;
-  background-color: #eee;
-  padding: 3%;
-  widht: 94%;
-  color: #999;
-  margin-top: 20px;
-  float: left;
-`
-
 // render
 
 var md = new Remarkable({
@@ -62,14 +52,12 @@ class DefaultPage extends Component {
 
     return (
 
-      <Layout>
+      <Layout
+        heroimage={<Img sizes={heroImage.sizes} />}
+        bottom={<Mitarbeiter />}
+        >
 
         <Heading>{title}</Heading>
-
-        { isImage
-          ? <Img sizes={heroImage.sizes} />
-          : null
-        }
 
         <Article dangerouslySetInnerHTML={{__html: bodyhtml}}/>
 
@@ -78,9 +66,7 @@ class DefaultPage extends Component {
           : null
         }
 
-        <ModuleBox>
-          <Mitarbeiter />
-        </ModuleBox>
+
 
       </Layout>
     )

@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown'
 const AngebotImg = styled(Img)`
   float: left;
   margin-bottom: 10px;
+  margin-right: 20px;
 `;
 
 
@@ -43,7 +44,7 @@ function Item(props) {
       <h3>{title}</h3>
 
       { isImage
-      ? <AngebotImg style={{float: "left", marginRight: "20px"}} fixed={image.fixed} />
+      ? <AngebotImg fixed={image.fixed} />
       : null
       }
 

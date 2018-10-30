@@ -15,7 +15,8 @@ const Footer = styled.div`
   background-color: #333;
   padding: 60px 0;
   overflow: auto;
-
+  width: 100%;
+  
   p {
     color: #999;
   }
@@ -62,11 +63,24 @@ const Content = styled(Container)`
   color: #333;
 `
 
+const ModuleBox = styled.div`
+  background-color: #eee;
+  color: #999;
+  margin-top: 20px;
+  float: left;
+`
+const HeroImage = styled.div`
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+`
+
 
 // render
 
 
-const Layout = ({ children }) => (
+const Layout = (props) => (
+
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -94,9 +108,19 @@ const Layout = ({ children }) => (
 
         <Header siteTitle={data.site.siteMetadata.title} />
 
+        <HeroImage>
+          {props.heroimage}
+        </HeroImage>
+
         <Content>
-          {children}
+          {props.children}
         </Content>
+
+        <ModuleBox>
+          <Container>
+            {props.bottom}
+          </Container>
+        </ModuleBox>
 
         <Footer>
           <Container>
@@ -105,6 +129,8 @@ const Layout = ({ children }) => (
             <p>Layout &amp; Design: <br /> Lukas Großmann - <ExternalLink href="http://www.luckyg.design" target="_blanc">www.luckyg.de</ExternalLink></p>
           </Container>
         </Footer>
+
+
 
       </>
     )}
