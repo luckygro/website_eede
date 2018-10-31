@@ -5,6 +5,7 @@ import { graphql } from "gatsby"
 import Layout from '../components/layout'
 import styled from 'styled-components'
 import Remarkable from 'remarkable'
+import Contactform from '../components/contactform'
 
 
 // Styled Components
@@ -46,20 +47,17 @@ class DefaultPage extends Component {
       heroImage,
       bodyhtml = md.render(body.body),
       isContact = contact && contact.length,
-      isImage = heroImage,
     } = this.props.data.contentfulDefaultPage
 
 
     return (
 
-      <Layout>
+      <Layout
+        heroimage={<Img sizes={heroImage.sizes} />}
+        bottom={<Contactform />}
+        >
 
         <Heading>{title}</Heading>
-
-        { isImage
-          ? <Img sizes={heroImage.sizes} />
-          : null
-        }
 
         <Article dangerouslySetInnerHTML={{__html: bodyhtml}}/>
 

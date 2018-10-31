@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Contact from '../components/contact'
 import Img from 'gatsby-image'
 import { graphql, Link } from "gatsby"
 import Layout from '../components/layout'
@@ -7,10 +6,6 @@ import styled from 'styled-components'
 
 
 // Styled Components
-
-const Article = styled.div`
-  margin: 20px 0;
-`;
 
 const HomeTitle = styled.h1`
   font-size: 40px;

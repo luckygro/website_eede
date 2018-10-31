@@ -46,7 +46,6 @@ class DefaultPage extends Component {
       heroImage,
       bodyhtml = md.render(body.body),
       isContact = contact && contact.length,
-      isImage = heroImage,
     } = this.props.data.contentfulDefaultPage
 
 
@@ -65,8 +64,6 @@ class DefaultPage extends Component {
           ? <Contacts contacts={contact} />
           : null
         }
-
-
 
       </Layout>
     )

@@ -46,20 +46,16 @@ class DefaultPage extends Component {
       heroImage,
       bodyhtml = md.render(body.body),
       isContact = contact && contact.length,
-      isImage = heroImage,
     } = this.props.data.contentfulDefaultPage
 
 
     return (
 
-      <Layout>
+      <Layout
+        heroimage={<Img sizes={heroImage.sizes} />}
+        >
 
         <Heading>{title}</Heading>
-
-        { isImage
-          ? <Img sizes={heroImage.sizes} />
-          : null
-        }
 
         <Article dangerouslySetInnerHTML={{__html: bodyhtml}}/>
 

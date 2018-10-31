@@ -16,7 +16,7 @@ const Footer = styled.div`
   padding: 60px 0;
   overflow: auto;
   width: 100%;
-  
+
   p {
     color: #999;
   }
@@ -66,8 +66,11 @@ const Content = styled(Container)`
 const ModuleBox = styled.div`
   background-color: #eee;
   color: #999;
-  margin-top: 20px;
+  margin-top: 40px;
   float: left;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
 `
 const HeroImage = styled.div`
   width: 100%;
