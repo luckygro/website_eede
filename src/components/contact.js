@@ -11,36 +11,30 @@ const ContactBox = styled.div`
   font-family: 'Roboto', 'Arial' !important;
   max-width: 500px;
   overflow: hidden;
-  background-color: #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  color: #999;
-  margin: 10px;
+  background-color: #eee;
+  color: #666;
+  margin: 10px 30px 10px 0px;
   float: left;
 `;
 
-const ContactHeading = styled.h3`
+const ContactHeading = styled.p`
+  color: #666;
+  font-weight: bold;
   padding: 0;
   margin: 0;
-  margin-bottom: 0.5em;
-  color: #666;
 `;
 
 const ContactButton = styled.a`
-  float: left;
   display: inline-block;
-  color: #999;
+  color: #fff;
   font-size: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #999;
-  border-radius: 3px;
+  padding: 10px;
   text-decoration: None;
-  transiton: border-color 1s, color 1s;
-  margin-top: 0.5em;
+  margin-top: 10px;
+  background: #999;
 
-  :hover {
-    color: #666;
-    border-color: #666;
+  :hover, :focus, :active {
+    background-color: #666;
   }
 `;
 
@@ -54,15 +48,14 @@ const ContactCity = styled.span`
 
 const ContactImage = styled(Img)`
   float: left;
-  border-radius: 50%;
-  margin-bottom: 10px;
 `;
 
 const ContactInfo = styled.div`
   float: left;
-  margin-left: 20px;
+  padding: 20px;
   margin-top: auto;
   margin-bottom: auto;
+  width: 250px;
 `;
 
 
