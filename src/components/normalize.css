@@ -1,0 +1,5 @@
+input, textarea, button, input:focus, textarea:focus, button:focus, a:focus {
+  border: 0px;
+  outline: none;
+  box-shadow: none;
+}
