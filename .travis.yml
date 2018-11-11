@@ -10,7 +10,7 @@ script:
 - npm install
 - npm install -g firebase-tools
 - cd ./functions
-- npm run install
+- npm install
 - cd ..
 - npm run build
 notifications:
