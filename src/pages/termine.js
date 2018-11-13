@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { graphql } from "gatsby"
 import Layout from '../components/layout'
-import styled from 'styled-components'
 import Termin from '../components/termin'
+import { Heading } from '../components/layoutStyles'
 
-// Styled Component
-
-
-const Heading = styled.h1`
-  font-size: 40px;
-  color: #666;
-  font-family: Roboto, Arial;
-  font-weight: normal;
-`;
 
 // render
 

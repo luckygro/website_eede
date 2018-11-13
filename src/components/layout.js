@@ -6,20 +6,20 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import './normalize.css'
 import './layout.css'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
 
 
 // styled Components
 const Footer = styled.div`
   margin-top: 60px;
-  background-color: #333;
+  background-color: ${(props) => props.theme.darkBackground};
   padding: 60px 0;
   overflow: auto;
   width: 100%;
 
   p {
-    color: #999;
+    color: ${(props) => props.theme.darkText};
   }
 `;
 
@@ -80,6 +80,18 @@ const HeroImage = styled.div`
 `
 
 
+// theme
+
+const theme = {
+  primaryColor: '#E31718',
+  brightText: '#fff',
+  darkText: '#999',
+  brightBackground: '#eee',
+  darkBackground: '#333',
+}
+
+
+
 // render
 
 
@@ -96,8 +108,10 @@ const Layout = (props) => (
       }
     `}
 
-    render={data => (
+    render={
+      data => (
       <>
+
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
@@ -110,30 +124,33 @@ const Layout = (props) => (
 
 
 
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <ThemeProvider theme={theme}>
+          <>
+            <Header siteTitle={data.site.siteMetadata.title} />
 
-        <HeroImage>
-          {props.heroimage}
-        </HeroImage>
+            <HeroImage>
+              {props.heroimage}
+            </HeroImage>
 
-        <Content>
-          {props.children}
-        </Content>
+            <Content>
+              {props.children}
+            </Content>
 
-        <ModuleBox>
-          <Container>
-            {props.bottom}
-          </Container>
-        </ModuleBox>
+            <ModuleBox>
+              <Container>
+                {props.bottom}
+              </Container>
+            </ModuleBox>
 
-        <Footer>
-          <Container>
-            <p>© Evangelisation Explosiv e.V. 2018</p>
-            <Separator />
-            <p>Layout &amp; Design: <br /> Lukas Großmann - <ExternalLink href="http://www.luckyg.design" target="_blanc">www.luckyg.de</ExternalLink></p>
-          </Container>
-        </Footer>
-
+            <Footer>
+              <Container>
+                <p>© Evangelisation Explosiv e.V. 2018</p>
+                <Separator />
+                <p>Layout &amp; Design: <br /> Lukas Großmann - <ExternalLink href="http://www.luckyg.design" target="_blanc">www.luckyg.design</ExternalLink></p>
+              </Container>
+            </Footer>
+          </>
+        </ThemeProvider>
 
 
       </>

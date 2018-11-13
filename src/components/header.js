@@ -15,7 +15,6 @@ const HeaderBar = styled.div`
   background: #eee;
   padding-top: 15px;
   padding-bottom: 0px;
-  box-shadow: 0px 0px 10px 5px #bbb;
 `
 
 const LogoImg = styled.img`

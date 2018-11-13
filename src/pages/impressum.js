@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import { graphql } from "gatsby"
 import Layout from '../components/layout'
-import styled from 'styled-components'
 import Remarkable from 'remarkable'
-// Styled Components
+import { Heading , Article } from '../components/layoutStyles'
 
-
-const Article = styled.div`
-  margin: 20px 0;
-`;
-
-const Heading = styled.h1`
-  font-size: 40px;
-  color: #666;
-  font-family: Roboto, Arial;
-  font-weight: normal;
-`;
 
 // render
 

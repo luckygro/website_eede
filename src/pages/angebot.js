@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from '../components/layout'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
+import { Heading } from '../components/layoutStyles'
 
 
 // Styled Components
@@ -12,14 +13,6 @@ const AngebotImg = styled(Img)`
   float: left;
   margin-bottom: 10px;
   margin-right: 20px;
-`;
-
-
-const Heading = styled.h1`
-  font-size: 40px;
-  color: #666;
-  font-family: Roboto, Arial;
-  font-weight: normal;
 `;
 
 const AngebotItem = styled.div`

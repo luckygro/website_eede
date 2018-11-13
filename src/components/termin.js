@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
 import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt, faClock, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faMapMarker, faChalkboardTeacher, faBookOpen } from '@fortawesome/free-solid-svg-icons'
 
 // Styled Components
 
@@ -12,107 +12,71 @@ const TerminBox = styled.div`
   font-family: 'Roboto', 'Arial' !important;
   overflow: hidden;
   background-color: #eee;
-  padding: 5%;
   border-radius: 0;
   color: #999;
-  margin: 10px;
+  margin: 20px 0px;
   float: left;
   width: 100%;
+`
+
+const TerminHeader = styled.div`
+  padding: 2%;
+  background-color: #ccc;
+  overflow: hidden;
+  height: 50px;
+`
+
+const TerminInfo = styled.div`
+  padding: 30px 2%;
+  float: left;
+  width: 40%;
+  p {
+    color: #666;
+    font-size: 18px;
+    margin-top: 0px;
+
+    small {
+      margin-left: 1.75em;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 30px 5%;
+    width: 90%;
+  }
+`
+
+const TerminContent = styled.div`
+  padding: 30px 2%;
+  float: left;
+  width: 52%;
+  p {
+    margin-top: 0px;
+    font-size: 18px;
+  }
+  @media (max-width: 768px) {
+    padding: 30px 5% 0px 5%;
+    width: 90%;
+  }
 `
 
 const TerminTitle = styled.h3`
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 0px;
-  width: 90%
+  color: ${(props) => props.theme.brightText};
   float: left;
-`
-
-const TerminText = styled.div`
-  width: 90%;
-  float: left;
-  margin-bottom: 20px;
-`
-
-const TerminInfo = styled.div`
-  width: 90%;
-  float: left;
-
-  p {
-    color: #666;
-  }
-
-  b {
-    color: #000;
-  }
 `
 
 const Icon = styled(FontAwesomeIcon)`
   margin-right: 0.5em;
-  margin-left: 1em;
 `
-
-// contact
-
-const ContactImage = styled(Img)`
-  border-radius: 50%;
-`
-
-const ContactBox = styled.div`
-  font-family: 'Roboto', 'Arial' !important;
-  overflow: hidden;
-  color: #999;
-  float: left;
-  margin-right: 60px;
-`
-
-const ContactInfo = styled.p`
-  margin-right: 1em;
-  clear: right;
-
-`
-
-// contact
 
 const KursImage = styled(Img)`
+  display: none;
+  float: right;
+  max-height: 50px;
 `
-
-const KursBox = styled.div`
-  font-family: 'Roboto', 'Arial' !important;
-  overflow: hidden;
-  color: #999;
-  float: left;
-  margin-right: 30px;
-`
-
-const KursInfo = styled.p`
-  margin-right: 1em;
-`
-
-
-const Schulungsleiter = ({node}) => {
-  return (
-    <ContactBox>
-      <ContactInfo>
-        <b>Schulungsleiter:</b><br />
-        {node.name}
-      </ContactInfo>
-      <ContactImage fixed={node.image.fixed} />
-    </ContactBox>
-  )
-}
-
-const Kurs = ({node}) => {
-  return (
-    <KursBox>
-      <KursInfo>
-        <b>Kurs:</b><br />
-        {node.title}
-      </KursInfo>
-      <KursImage fixed={node.image.fixed} />
-    </KursBox>
-  )
-}
 
 
 // render
@@ -127,6 +91,7 @@ export default function Termin(props) {
       endDate,
       kurs,
       ort,
+      hasOrt = ort,
       hasKurs = kurs,
       hasContact = schulungsleiter,
   }  = props.node.node
@@ -134,45 +99,47 @@ export default function Termin(props) {
   return (
     <TerminBox>
 
-      <TerminTitle>{title}</TerminTitle>
+      <TerminHeader>
+        <TerminTitle>{title}</TerminTitle>
+        { hasKurs
+          ? <KursImage fixed={kurs.image.fixed} />
+          : null
+        }
+      </TerminHeader>
+
+      <TerminContent>
+
+        <ReactMarkdown source={text.text} />
+
+      </TerminContent>
 
       <TerminInfo>
 
-        <p><b>Beginn:</b>
+        <p>
           <Icon icon={faCalendarAlt} />
-          <Moment format="D MMM YYYY">{dateTime}</Moment>
-
-          <Icon icon={faClock} />
-          <Moment format="hh:mm">{dateTime}</Moment>
+          <Moment format="D. MMMM YYYY hh:mm">{dateTime}</Moment> Uhr
+          <br />
+          <small>
+            bis <Moment format="D. MMMM YYYY hh:mm">{endDate}</Moment> Uhr
+          </small>
         </p>
 
-        <p><b>Ende:</b>
-          <Icon icon={faCalendarAlt} />
-          <Moment format="D MMM YYYY">{endDate}</Moment>
+        { hasOrt
+          ? <p><Icon icon={faMapMarker} />Ort: {ort}</p>
+          : null
+        }
 
-          <Icon icon={faClock} />
-          <Moment format="hh:mm">{endDate}</Moment>
-        </p>
+        { hasContact
+          ? <p><Icon icon={faChalkboardTeacher} />Schulungsleiter: {schulungsleiter.name}</p>
+          : null
+        }
 
-        <p><b>Ort:</b>
-          <Icon icon={faMapMarker} />
-          {ort}
-
-        </p>
+        { hasKurs
+          ? <p><Icon icon={faBookOpen} />Kurs: {kurs.title}</p>
+          : null
+        }
 
       </TerminInfo>
-
-      <TerminText><ReactMarkdown source={text.text} /></TerminText>
-
-      { hasContact
-        ? <Schulungsleiter node={schulungsleiter} />
-        : null
-      }
-
-      { hasKurs
-        ? <Kurs node={kurs} />
-        : null
-      }
 
 
     </TerminBox>
