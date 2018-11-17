@@ -8,8 +8,5 @@ yarn-error.log
 /public
 .DS_Store
 
-# firebase functions
-/functions
-
 # environment
 .env

@@ -25,3 +25,4 @@ Fragen an Dave:
 ---------
 yarn
 dotenv plugin
+git stash / git stash apply
