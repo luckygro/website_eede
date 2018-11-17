@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
     title: 'EE Deutschland',
@@ -19,8 +23,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentful',
       options: {
-        spaceId: 'i3g6bttat7r4',
-        accessToken: '5f6b25771f7e5d8f3ef506e0f294538d17c71d2673e8ba60e05b319dfc927f31'
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       }
     },
     'gatsby-plugin-offline',

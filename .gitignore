@@ -10,3 +10,6 @@ yarn-error.log
 
 # firebase functions
 /functions
+
+# environment
+.env
