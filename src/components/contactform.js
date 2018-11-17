@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 
 // Styled Components
@@ -19,7 +19,6 @@ const InputGroupSmall = styled.div`
   :nth-child(2) {
     margin-left: 0%;
   }
-
 `
 
 const Label = styled.label`
@@ -73,37 +72,97 @@ const FormButton = styled.button`
   margin-top: 30px;
   background: #999;
 
-  :hover, :focus, :active {
+  :hover,
+  :focus,
+  :active {
     background-color: #666;
   }
-`;
+`
 
+class Contactform extends React.Component {
+  state = {
+    status: '',
+    data: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  }
 
-const Contactform = () => {
-  return(
-    <form id="contactForm" action="https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage">
+  submit = e => {
+    e.preventDefault()
 
-      <h3>Senden Sie uns eine E-Mail!</h3>
-      <InputGroupSmall className="small">
-        <Label>Name</Label>
-        <TextBox type="text" name="name" required="true" placeholder="Vorname Nachname" />
-      </InputGroupSmall>
+    let {
+      data: { name, email, message },
+    } = this.state
 
-      <InputGroupSmall className="small">
-        <Label>Email</Label>
-        <TextBox type="email" name="email" required="true" placeholder="ich@example.de"/>
-      </InputGroupSmall>
+    fetch(
+      `https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage?name=${name}&email=${email}&message=${message}`,
+      { mode: 'no-cors' }
+    ).then(res =>
+      this.setState({ status: 'Email wurde erfolgreich versandt.' })
+    )
+  }
 
-      <InputGroupBig className="big">
-        <Label>Nachricht</Label>
-        <TextArea name="message" required="true" placeholder="Hallo..." rows="7"/>
-      </InputGroupBig>
+  handleChange = ({ target: { name, value } }) => {
+    this.setState(state => ({
+      data: Object.assign({}, state.data, { [name]: value }),
+    }))
+  }
 
-      <InputGroupBig>
-        <FormButton type="submit">Absenden</FormButton>
-      </InputGroupBig>
-    </form>
-  )
+  render() {
+    let { data } = this.state
+
+    return (
+      <form
+        id="contactForm"
+        action="https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage"
+        onSubmit={this.submit}
+      >
+        <h3>Senden Sie uns eine E-Mail!</h3>
+        <span>{this.state.status}</span>
+        <InputGroupSmall className="small">
+          <Label>Name</Label>
+          <TextBox
+            type="text"
+            name="name"
+            required
+            placeholder="Vorname Nachname"
+            value={data.name}
+            onChange={this.handleChange}
+          />
+        </InputGroupSmall>
+
+        <InputGroupSmall className="small">
+          <Label>Email</Label>
+          <TextBox
+            type="email"
+            name="email"
+            required
+            placeholder="ich@example.de"
+            value={data.email}
+            onChange={this.handleChange}
+          />
+        </InputGroupSmall>
+
+        <InputGroupBig className="big">
+          <Label>Nachricht</Label>
+          <TextArea
+            name="message"
+            required
+            placeholder="Hallo..."
+            rows="7"
+            value={data.message}
+            onChange={this.handleChange}
+          />
+        </InputGroupBig>
+
+        <InputGroupBig>
+          <FormButton type="submit">Absenden</FormButton>
+        </InputGroupBig>
+      </form>
+    )
+  }
 }
 
 // tbd
