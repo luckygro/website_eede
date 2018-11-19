@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { UnmountClosed } from 'react-collapse';
-import MediaQuery from 'react-responsive';
+import { UnmountClosed } from 'react-collapse'
+import MediaQuery from 'react-responsive'
 import logo from '../images/logo.png'
-
 
 // styling
 
@@ -43,7 +42,8 @@ const MenuToggle = styled.button`
   margin-top: 0.5em;
   background-color: none;
 
-  :hover, :focus {
+  :hover,
+  :focus {
     color: #666;
     border-color: #666;
   }
@@ -52,7 +52,7 @@ const MenuToggle = styled.button`
 const MenuLink = styled(Link)`
   display: block;
   color: #666;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   text-decoration: none;
   text-transform: uppercase;
@@ -61,9 +61,10 @@ const MenuLink = styled(Link)`
   -webkit-transition: border-top 0.25s, color 0.25s;
   transition: border-top 0.25s, color 0.25s;
 
-  :hover, :focus {
+  :hover,
+  :focus {
     color: #333;
-    border-top-color: #E31718;
+    border-top-color: #e31718;
   }
 `
 const MenuItem = styled.li`
@@ -84,23 +85,19 @@ const MenuList = styled.ul`
   overflow-y: hidden;
 `
 
-
-
 // render
 
 function ListItem(props) {
   return (
-    <MenuItem style={{paddingLeft: '8px', paddingRight: '8px'}}>
-      <MenuLink to={props.link}>
-      {props.value}
-      </MenuLink>
+    <MenuItem style={{ paddingLeft: '8px', paddingRight: '8px' }}>
+      <MenuLink to={props.link}>{props.value}</MenuLink>
     </MenuItem>
-  );
+  )
 }
 
 function List() {
   return (
-    <nav style={{display: 'block'}}>
+    <nav style={{ display: 'block' }}>
       <MenuList>
         <ListItem link="ueber-uns" value="Über uns" />
         <ListItem link="termine" value="Termine" />
@@ -123,44 +120,43 @@ function Logo(props) {
   )
 }
 
-
 // render class
 export default class Header extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.closeNavbar = this.closeNavbar.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this)
+    this.closeNavbar = this.closeNavbar.bind(this)
     this.state = {
-      collapsed: true
-    };
+      collapsed: true,
+    }
   }
 
   toggleNavbar() {
     this.setState({
-      collapsed: !this.state.collapsed
-    });
+      collapsed: !this.state.collapsed,
+    })
   }
 
   closeNavbar() {
     if (this.state.collapsed !== true) {
-      this.toggleNavbar();
+      this.toggleNavbar()
     }
   }
 
   render() {
     return (
-
       <HeaderBar>
         <Container>
-
           <Logo alt={this.props.siteTitle} />
 
           <MediaQuery maxWidth={1024}>
-            <MenuToggle onClick={this.toggleNavbar} className="mr-2">Menü</MenuToggle>
+            <MenuToggle onClick={this.toggleNavbar} className="mr-2">
+              Menü
+            </MenuToggle>
           </MediaQuery>
 
-          <div style={{float: 'right', display: 'block'}}>
+          <div style={{ float: 'right', display: 'block' }}>
             <MediaQuery minWidth={1025}>
               <List />
             </MediaQuery>

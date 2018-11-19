@@ -1,4 +1,4 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env`,
 })
 
@@ -25,7 +25,7 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      }
+      },
     },
     'gatsby-plugin-offline',
     'gatsby-transformer-remark',

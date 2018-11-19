@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Img from 'gatsby-image'
-import { graphql, Link } from "gatsby"
+import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import styled from 'styled-components'
-
 
 // Styled Components
 
 const HomeTitle = styled.h1`
   font-size: 40px;
-  color: #E31718;
+  color: #e31718;
   font-family: Roboto, Arial;
   font-weight: normal;
   text-align: center;
@@ -22,8 +21,8 @@ const ModuleImg = styled(Img)`
   margin-right: 20px;
 `
 
-const HomeSeparator = styled.hr `
-  background-color: #E31718;
+const HomeSeparator = styled.hr`
+  background-color: #e31718;
   height: 2px;
   text-align: left;
   display: block;
@@ -36,7 +35,7 @@ const HomeSeparator = styled.hr `
 
 const HomeSubtitle = styled.h2`
   font-size: 32px;
-  color: #E31718;
+  color: #e31718;
   font-family: Roboto, Arial;
   font-weight: normal;
   text-align: center;
@@ -46,10 +45,10 @@ const HomeSubtitle = styled.h2`
 const ModuleButton = styled(Link)`
   float: left;
   display: inline-block;
-  color: #E31718;
+  color: #e31718;
   font-size: 1em;
   padding: 0.25em 1em;
-  border: 2px solid #E31718;
+  border: 2px solid #e31718;
   border-radius: 3px;
   text-decoration: None;
   transiton: border-color 1s, color 1s;
@@ -66,8 +65,7 @@ const ModuleTitle = styled.h3`
   margin-top: 0px;
 `
 
-const ModuleText = styled.p`
-`
+const ModuleText = styled.p``
 
 const StartseiteModuleBox = styled.div`
   width: 100%;
@@ -78,16 +76,18 @@ const StartseiteModuleBox = styled.div`
 
 // render
 
-const StartseiteModule = ({node}) => (
+const StartseiteModule = ({ node }) => (
   <StartseiteModuleBox>
     <ModuleImg fixed={node.node.bild.fixed} />
     <ModuleTitle>{node.node.title}</ModuleTitle>
     <ModuleText>{node.node.text}</ModuleText>
-    <ModuleButton to={node.node.buttonLink}>{node.node.buttonText}</ModuleButton>
+    <ModuleButton to={node.node.buttonLink}>
+      {node.node.buttonText}
+    </ModuleButton>
   </StartseiteModuleBox>
 )
 
-const StartseiteModules = ({modules}) => (
+const StartseiteModules = ({ modules }) => (
   <div>
     {modules.map(singlemodule => (
       <StartseiteModule key={singlemodule.node.title} node={singlemodule} />
@@ -96,31 +96,22 @@ const StartseiteModules = ({modules}) => (
 )
 
 class IndexPage extends Component {
-
   render() {
-
     const {
       hauptslogan,
       unterslogan,
       heroImage,
     } = this.props.data.contentfulStartPage
 
-    const {
-      edges
-    } = this.props.data.allContentfulStartseiteModul
+    const { edges } = this.props.data.allContentfulStartseiteModul
 
     return (
-
-      <Layout
-        heroimage={<Img sizes={heroImage.sizes} />}
-        >
-
+      <Layout heroimage={<Img sizes={heroImage.sizes} />}>
         <HomeTitle>{hauptslogan}</HomeTitle>
         <HomeSeparator />
         <HomeSubtitle>{unterslogan}</HomeSubtitle>
 
         <StartseiteModules modules={edges} />
-
       </Layout>
     )
   }
@@ -130,7 +121,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query indexPageQuery {
-    contentfulStartPage(slug: {eq: "index"}) {
+    contentfulStartPage(slug: { eq: "index" }) {
       hauptslogan
       unterslogan
       heroImage {

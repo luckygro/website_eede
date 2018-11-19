@@ -1,40 +1,28 @@
-import React, { Component } from 'react';
-import { graphql } from "gatsby"
+import React, { Component } from 'react'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Termin from '../components/termin'
 import { Heading } from '../components/layoutStyles'
 
-
 // render
 
-const TermineList = ({list}) => (
+const TermineList = ({ list }) => (
   <div>
     {list.map(singleitem => (
-      <Termin
-        node={singleitem}
-        key={singleitem.node.title} />
+      <Termin node={singleitem} key={singleitem.node.title} />
     ))}
   </div>
-);
-
+)
 
 class TerminePage extends Component {
-
   render() {
-
-    const {
-      edges
-    } = this.props.data.allContentfulTermine
-
+    const { edges } = this.props.data.allContentfulTermine
 
     return (
-
       <Layout>
-
         <Heading>Termine</Heading>
 
         <TermineList list={edges} />
-
       </Layout>
     )
   }

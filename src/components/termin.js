@@ -1,10 +1,15 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
 import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt, faMapMarker, faChalkboardTeacher, faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCalendarAlt,
+  faMapMarker,
+  faChalkboardTeacher,
+  faBookOpen,
+} from '@fortawesome/free-solid-svg-icons'
 
 // Styled Components
 
@@ -64,7 +69,7 @@ const TerminTitle = styled.h3`
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 0px;
-  color: ${(props) => props.theme.brightText};
+  color: ${props => props.theme.brightText};
   float: left;
 `
 
@@ -78,43 +83,34 @@ const KursImage = styled(Img)`
   max-height: 50px;
 `
 
-
 // render
 
 export default function Termin(props) {
-
   const {
-      title,
-      text,
-      dateTime,
-      schulungsleiter,
-      endDate,
-      kurs,
-      ort,
-      hasOrt = ort,
-      hasKurs = kurs,
-      hasContact = schulungsleiter,
-  }  = props.node.node
+    title,
+    text,
+    dateTime,
+    schulungsleiter,
+    endDate,
+    kurs,
+    ort,
+    hasOrt = ort,
+    hasKurs = kurs,
+    hasContact = schulungsleiter,
+  } = props.node.node
 
   return (
     <TerminBox>
-
       <TerminHeader>
         <TerminTitle>{title}</TerminTitle>
-        { hasKurs
-          ? <KursImage fixed={kurs.image.fixed} />
-          : null
-        }
+        {hasKurs ? <KursImage fixed={kurs.image.fixed} /> : null}
       </TerminHeader>
 
       <TerminContent>
-
         <ReactMarkdown source={text.text} />
-
       </TerminContent>
 
       <TerminInfo>
-
         <p>
           <Icon icon={faCalendarAlt} />
           <Moment format="D. MMMM YYYY hh:mm">{dateTime}</Moment> Uhr
@@ -124,24 +120,27 @@ export default function Termin(props) {
           </small>
         </p>
 
-        { hasOrt
-          ? <p><Icon icon={faMapMarker} />Ort: {ort}</p>
-          : null
-        }
+        {hasOrt ? (
+          <p>
+            <Icon icon={faMapMarker} />
+            Ort: {ort}
+          </p>
+        ) : null}
 
-        { hasContact
-          ? <p><Icon icon={faChalkboardTeacher} />Schulungsleiter: {schulungsleiter.name}</p>
-          : null
-        }
+        {hasContact ? (
+          <p>
+            <Icon icon={faChalkboardTeacher} />
+            Schulungsleiter: {schulungsleiter.name}
+          </p>
+        ) : null}
 
-        { hasKurs
-          ? <p><Icon icon={faBookOpen} />Kurs: {kurs.title}</p>
-          : null
-        }
-
+        {hasKurs ? (
+          <p>
+            <Icon icon={faBookOpen} />
+            Kurs: {kurs.title}
+          </p>
+        ) : null}
       </TerminInfo>
-
-
     </TerminBox>
   )
 }

@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Contact from '../components/contact'
 import Img from 'gatsby-image'
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Remarkable from 'remarkable'
 import Mitarbeiter from '../components/mitarbeiter'
-import { Heading , Article } from '../components/layoutStyles'
+import { Heading, Article } from '../components/layoutStyles'
 
 // render
 
 var md = new Remarkable({
   html: true,
-  breaks: true
-});
+  breaks: true,
+})
 
-const Contacts = ({contacts}) => (
+const Contacts = ({ contacts }) => (
   <div>
     {contacts.map(singlecontact => (
       <Contact key={singlecontact.name} node={singlecontact} />
     ))}
   </div>
-);
+)
 
 class DefaultPage extends Component {
-
   render() {
-
     const {
       title,
       body,
@@ -35,23 +33,16 @@ class DefaultPage extends Component {
       isContact = contact && contact.length,
     } = this.props.data.contentfulDefaultPage
 
-
     return (
-
       <Layout
         heroimage={<Img sizes={heroImage.sizes} />}
         bottom={<Mitarbeiter />}
-        >
-
+      >
         <Heading>{title}</Heading>
 
-        <Article dangerouslySetInnerHTML={{__html: bodyhtml}}/>
+        <Article dangerouslySetInnerHTML={{ __html: bodyhtml }} />
 
-        { isContact
-          ? <Contacts contacts={contact} />
-          : null
-        }
-
+        {isContact ? <Contacts contacts={contact} /> : null}
       </Layout>
     )
   }
@@ -61,7 +52,7 @@ export default DefaultPage
 
 export const pageQuery = graphql`
   query ueberUnsPageQuery {
-    contentfulDefaultPage(slug: {eq: "ueber-uns"}) {
+    contentfulDefaultPage(slug: { eq: "ueber-uns" }) {
       title
       slug
       body {
@@ -84,7 +75,7 @@ export const pageQuery = graphql`
         phone
         email
         image {
-					fixed(width: 150) {
+          fixed(width: 150) {
             width
             height
             src

@@ -2,8 +2,8 @@ Fragen an Dave:
 
 1. Kontaktformular
 
-- [ ] Umsetzung in firebase
-- [ ] DSGVO-konforme Übermittlung & Speicherung
+- [x] Umsetzung in firebase
+- [x] DSGVO-konforme Übermittlung & Speicherung
 
 2. Markdown rendering
 
@@ -36,3 +36,4 @@ google calendar
 react bind this https://reactjs.org/docs/handling-events.html
 fetch API https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 cors aktivieren: https://github.com/firebase/functions-samples/blob/master/quickstarts/time-server/functions/index.js & https://stackoverflow.com/questions/42755131/enabling-cors-in-cloud-functions-for-firebase
+prettier für alle dateien

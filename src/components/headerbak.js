@@ -29,7 +29,6 @@ const Container = styled.div`
   margin-right: auto;
 `
 
-
 // render
 
 // Logo
@@ -43,7 +42,6 @@ function Logo(props) {
 
 class Header extends React.Component {
   render() {
-
     return (
       <HeaderBar>
         <Container>

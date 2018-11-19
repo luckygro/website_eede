@@ -31,9 +31,7 @@
     "styled-components": "^4.0.0",
     "travis-ci": "^2.2.0"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",

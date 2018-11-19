@@ -14,10 +14,10 @@ const InputGroupSmall = styled.div`
 
   @media (min-width: 1024px) {
     width: 47%;
-    margin-left: 6%;
-  }
-  :nth-child(2) {
     margin-left: 0%;
+    :nth-of-type(2) {
+      margin-left: 6%;
+    }
   }
 `
 
@@ -61,6 +61,12 @@ const TextArea = styled.textarea`
   :valid {
     border-left: #0a0 2px solid;
   }
+`
+
+const FormBanner = styled.span`
+  width: 100%;
+  float: left;
+  margin-top: 10px;
 `
 
 const FormButton = styled.button`
@@ -120,7 +126,7 @@ class Contactform extends React.Component {
         onSubmit={this.submit}
       >
         <h3>Senden Sie uns eine E-Mail!</h3>
-        <span>{this.state.status}</span>
+        <FormBanner>{this.state.status}</FormBanner>
         <InputGroupSmall className="small">
           <Label>Name</Label>
           <TextBox

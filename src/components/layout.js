@@ -8,20 +8,18 @@ import './normalize.css'
 import './layout.css'
 import styled, { ThemeProvider } from 'styled-components'
 
-
-
 // styled Components
 const Footer = styled.div`
   margin-top: 60px;
-  background-color: ${(props) => props.theme.darkBackground};
+  background-color: ${props => props.theme.darkBackground};
   padding: 60px 0;
   overflow: auto;
   width: 100%;
 
   p {
-    color: ${(props) => props.theme.darkText};
+    color: ${props => props.theme.darkText};
   }
-`;
+`
 
 const Container = styled.div`
   overflow: hidden;
@@ -37,9 +35,9 @@ const Container = styled.div`
   @media only screen and (max-width 1024px) {
     width: 95%;
   }
-`;
+`
 
-const Separator = styled.hr `
+const Separator = styled.hr`
   background-color: #bbb;
   height: 1px;
   text-align: left;
@@ -48,7 +46,7 @@ const Separator = styled.hr `
   max-width: 150px;
   border: 0;
   margin-bottom: 1em;
-`;
+`
 
 const ExternalLink = styled.a`
   color: #999;
@@ -58,7 +56,7 @@ const ExternalLink = styled.a`
     color: #bbb;
     text-decoration: underline;
   }
-`;
+`
 
 const Content = styled(Container)`
   color: #333;
@@ -79,7 +77,6 @@ const HeroImage = styled.div`
   overflow: hidden;
 `
 
-
 // theme
 
 const theme = {
@@ -90,13 +87,9 @@ const theme = {
   darkBackground: '#333',
 }
 
-
-
 // render
 
-
-const Layout = (props) => (
-
+const Layout = props => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -107,11 +100,8 @@ const Layout = (props) => (
         }
       }
     `}
-
-    render={
-      data => (
+    render={data => (
       <>
-
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
@@ -122,37 +112,32 @@ const Layout = (props) => (
           <html lang="en" />
         </Helmet>
 
-
-
         <ThemeProvider theme={theme}>
           <>
             <Header siteTitle={data.site.siteMetadata.title} />
 
-            <HeroImage>
-              {props.heroimage}
-            </HeroImage>
+            <HeroImage>{props.heroimage}</HeroImage>
 
-            <Content>
-              {props.children}
-            </Content>
+            <Content>{props.children}</Content>
 
             <ModuleBox>
-              <Container>
-                {props.bottom}
-              </Container>
+              <Container>{props.bottom}</Container>
             </ModuleBox>
 
             <Footer>
               <Container>
                 <p>© Evangelisation Explosiv e.V. 2018</p>
                 <Separator />
-                <p>Layout &amp; Design: <br /> Lukas Großmann - <ExternalLink href="http://www.luckyg.design" target="_blanc">www.luckyg.design</ExternalLink></p>
+                <p>
+                  Layout &amp; Design: <br /> Lukas Großmann -{' '}
+                  <ExternalLink href="http://www.luckyg.design" target="_blanc">
+                    www.luckyg.design
+                  </ExternalLink>
+                </p>
               </Container>
             </Footer>
           </>
         </ThemeProvider>
-
-
       </>
     )}
   />

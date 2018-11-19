@@ -1,9 +1,8 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import Img from 'gatsby-image'
-import { StaticQuery, graphql } from "gatsby"
-
+import { StaticQuery, graphql } from 'gatsby'
 
 // Styled Components
 
@@ -22,62 +21,56 @@ const PersonName = styled.p`
   text-align: center;
 `
 
-
 // Render
-const Person = ({data}) => (
+const Person = ({ data }) => (
   <PersonBox>
     <PersonImg fixed={data.image.fixed} />
     <PersonName>{data.name}</PersonName>
   </PersonBox>
 )
 
-const List = ({persons}) => (
+const List = ({ persons }) => (
   <div>
     {persons.map(singlePerson => (
       <Person key={singlePerson.node.name} data={singlePerson.node} />
     ))}
   </div>
-);
+)
 
-export default ({slug}) => (
+export default ({ slug }) => (
   <StaticQuery
-
-      query={graphql`
-        query modulMitarbeiterQuery {
-          contentfulModule(slug: {eq: "unseremitarbeiter"}) {
-            title
-            slug
-            text {
-              text
-            }
+    query={graphql`
+      query modulMitarbeiterQuery {
+        contentfulModule(slug: { eq: "unseremitarbeiter" }) {
+          title
+          slug
+          text {
+            text
           }
-          allContentfulPerson {
-            edges {
-              node {
-                name
-                image {
-                  fixed(width: 150) {
-                    width
-                    height
-                    src
-                    srcSet
-                  }
+        }
+        allContentfulPerson {
+          edges {
+            node {
+              name
+              image {
+                fixed(width: 150) {
+                  width
+                  height
+                  src
+                  srcSet
                 }
               }
             }
           }
         }
-      `}
-
-      render={data => (
-        <div>
-
-          <h3>{data.contentfulModule.title}</h3>
-          <ReactMarkdown source={data.contentfulModule.text.text} />
-          <List persons={data.allContentfulPerson.edges} />
-
-        </div>
-      )}
-
-    />
+      }
+    `}
+    render={data => (
+      <div>
+        <h3>{data.contentfulModule.title}</h3>
+        <ReactMarkdown source={data.contentfulModule.text.text} />
+        <List persons={data.allContentfulPerson.edges} />
+      </div>
+    )}
+  />
 )

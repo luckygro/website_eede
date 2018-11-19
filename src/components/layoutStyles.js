@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
-
 // styled Components
 const Article = styled.div`
   margin: 20px 0;
-`;
+`
 
 const Heading = styled.h1`
   font-size: 40px;
@@ -21,11 +20,13 @@ const Button = styled.button`
   margin-top: 30px;
   background: #999;
 
-  :hover, :focus, :active {
+  :hover,
+  :focus,
+  :active {
     background-color: #666;
   }
 `
-const Separator = styled.hr `
+const Separator = styled.hr`
   background-color: #bbb;
   height: 1px;
   text-align: left;
@@ -36,4 +37,4 @@ const Separator = styled.hr `
   margin-bottom: 1em;
 `
 
-export { Article , Heading , Button , Separator }
+export { Article, Heading, Button, Separator }
