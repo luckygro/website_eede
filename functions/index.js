@@ -1,27 +1,38 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-const functions = require('firebase-functions');
+const functions = require('firebase-functions')
+const admin = require('firebase-admin')
+admin.initializeApp()
 
-// The Firebase Admin SDK to access the Firebase Realtime Database.
-const admin = require('firebase-admin');
-admin.initializeApp();
-
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
+// process contact form
 exports.addMessage = functions.https.onRequest((req, res) => {
+  console.log(req.headers)
+  console.log(req.method)
+  if (req.method == 'POST') {
+    console.log(req.body)
+    // get content
+    name = req.body.name
+    console.log(name)
+    email = req.body.email
+    console.log(email)
+    message = req.body.message
+    console.log(message)
 
-  // Grab the text parameter.
-  const name = req.query.name;
-  const email = req.query.email;
-  const message = req.query.message;
+    // push content to database
+    return (
+      admin
+        .database()
+        .ref('/messages')
+        .push({
+          name: name,
+          email: email,
+          message: message,
+        })
 
-  // Push the new message into the Realtime Database using the Firebase Admin SDK.
-  return admin.database().ref('/messages').push({
-      name: name,
-      email: email,
-      message: message,
-    }).then((snapshot) => {
-
-    // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    return res.end();
-  });
-});
+        // send response
+        .then(res.status(200).send('OK'))
+    )
+    // send error response
+  } else {
+    res.status(404).send('ERROR')
+  }
+})
