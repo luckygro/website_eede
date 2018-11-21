@@ -113,7 +113,6 @@ class Termin extends React.Component {
 
         <TerminContent>
           <ReactMarkdown source={termin.text.text} />
-          <Moment />
         </TerminContent>
 
         <TerminInfo>
