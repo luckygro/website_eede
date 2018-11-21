@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
+import moment from 'moment'
 import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -85,62 +86,71 @@ const KursImage = styled(Img)`
 
 // render
 
-export default function Termin(props) {
-  const {
-    title,
-    text,
-    dateTime,
-    schulungsleiter,
-    endDate,
-    kurs,
-    ort,
-    hasOrt = ort,
-    hasKurs = kurs,
-    hasContact = schulungsleiter,
-  } = props.node.node
+class Termin extends React.Component {
+  state = {
+    status: '',
+  }
 
-  return (
-    <TerminBox>
-      <TerminHeader>
-        <TerminTitle>{title}</TerminTitle>
-        {hasKurs ? <KursImage fixed={kurs.image.fixed} /> : null}
-      </TerminHeader>
+  render() {
+    let termin = this.props.node.node
 
-      <TerminContent>
-        <ReactMarkdown source={text.text} />
-      </TerminContent>
+    let now = moment()
 
-      <TerminInfo>
-        <p>
-          <Icon icon={faCalendarAlt} />
-          <Moment format="D. MMMM YYYY hh:mm">{dateTime}</Moment> Uhr
-          <br />
-          <small>
-            bis <Moment format="D. MMMM YYYY hh:mm">{endDate}</Moment> Uhr
-          </small>
-        </p>
+    if (now.isAfter(termin.endDate)) {
+      return null
+    }
 
-        {hasOrt ? (
+    let hasKurs = termin.kurs
+    let hasOrt = termin.ort
+    let hasContact = termin.schulungsleiter
+
+    return (
+      <TerminBox>
+        <TerminHeader>
+          <TerminTitle>{termin.title}</TerminTitle>
+          {hasKurs ? <KursImage fixed={termin.kurs.image.fixed} /> : null}
+        </TerminHeader>
+
+        <TerminContent>
+          <ReactMarkdown source={termin.text.text} />
+          <Moment />
+        </TerminContent>
+
+        <TerminInfo>
           <p>
-            <Icon icon={faMapMarker} />
-            Ort: {ort}
+            <Icon icon={faCalendarAlt} />
+            <Moment format="D. MMMM YYYY hh:mm">{termin.dateTime}</Moment> Uhr
+            <br />
+            <small>
+              bis <Moment format="D. MMMM YYYY hh:mm">{termin.endDate}</Moment>{' '}
+              Uhr
+            </small>
           </p>
-        ) : null}
 
-        {hasContact ? (
-          <p>
-            <Icon icon={faChalkboardTeacher} />
-            Schulungsleiter: {schulungsleiter.name}
-          </p>
-        ) : null}
+          {hasOrt ? (
+            <p>
+              <Icon icon={faMapMarker} />
+              Ort: {termin.ort}
+            </p>
+          ) : null}
 
-        {hasKurs ? (
-          <p>
-            <Icon icon={faBookOpen} />
-            Kurs: {kurs.title}
-          </p>
-        ) : null}
-      </TerminInfo>
-    </TerminBox>
-  )
+          {hasContact ? (
+            <p>
+              <Icon icon={faChalkboardTeacher} />
+              Schulungsleiter: {termin.schulungsleiter.name}
+            </p>
+          ) : null}
+
+          {hasKurs ? (
+            <p>
+              <Icon icon={faBookOpen} />
+              Kurs: {termin.kurs.title}
+            </p>
+          ) : null}
+        </TerminInfo>
+      </TerminBox>
+    )
+  }
 }
+
+export default Termin
