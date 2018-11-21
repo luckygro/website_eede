@@ -59,25 +59,29 @@ const ContactInfo = styled.div`
 
 // render
 
-const Contact = contacts => {
-  /*let showContacts = contact && contact.length
+const Contact = ({ contacts }) => {
+  let showContacts = contacts && contacts.length
 
   if (!showContacts) {
     return null
-  }*/
-
-  let { node } = contacts
+  }
 
   return (
-    <ContactBox>
-      <ContactImage fixed={node.image.fixed} />
-      <ContactInfo>
-        <ContactHeading>{node.name}</ContactHeading>
-        <ContactPosition>{node.position}</ContactPosition>
-        <ContactCity>{node.city}</ContactCity>
-        <ContactButton href={'mailto:' + node.email}>Email</ContactButton>
-      </ContactInfo>
-    </ContactBox>
+    <div>
+      {contacts.map(contact => (
+        <ContactBox key={contact.name}>
+          <ContactImage fixed={contact.image.fixed} />
+          <ContactInfo>
+            <ContactHeading>{contact.name}</ContactHeading>
+            <ContactPosition>{contact.position}</ContactPosition>
+            <ContactCity>{contact.city}</ContactCity>
+            <ContactButton href={'mailto:' + contact.email}>
+              Email
+            </ContactButton>
+          </ContactInfo>
+        </ContactBox>
+      ))}
+    </div>
   )
 }
 

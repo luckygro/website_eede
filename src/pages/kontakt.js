@@ -14,14 +14,6 @@ var md = new Remarkable({
   breaks: true,
 })
 
-const Contacts = ({ contacts }) => (
-  <div>
-    {contacts.map(singlecontact => (
-      <Contact key={singlecontact.name} node={singlecontact} />
-    ))}
-  </div>
-)
-
 class DefaultPage extends Component {
   render() {
     const {
@@ -30,7 +22,6 @@ class DefaultPage extends Component {
       contact,
       heroImage,
       bodyhtml = md.render(body.body),
-      isContact = contact && contact.length,
     } = this.props.data.contentfulDefaultPage
 
     return (
@@ -42,7 +33,7 @@ class DefaultPage extends Component {
 
         <Article dangerouslySetInnerHTML={{ __html: bodyhtml }} />
 
-        {isContact ? <Contacts contacts={contact} /> : null}
+        <Contact contacts={contact} />
       </Layout>
     )
   }
