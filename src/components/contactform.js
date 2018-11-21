@@ -109,13 +109,13 @@ class Contactform extends React.Component {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        name: 'Lukas',
-        email: 'a@b.de',
-        message: 'Hallo',
+        name: name,
+        email: email,
+        message: message,
       }),
-    }).then(res =>
+    }).then(res => {
       this.setState({ status: 'Email wurde erfolgreich versandt.' })
-    )
+    })
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -130,7 +130,7 @@ class Contactform extends React.Component {
     return (
       <form
         id="contactForm"
-        action="https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage"
+        action="http://localhost:5001/eede-d8ccf/us-central1/addMessage"
         onSubmit={this.submit}
       >
         <h3>Senden Sie uns eine E-Mail!</h3>
