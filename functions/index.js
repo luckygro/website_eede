@@ -2,6 +2,10 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 const cors = require('cors')({ origin: true })
+var mailgun = require('mailgun-js')({
+  apiKey: 'XX',
+  domain: 'XX',
+})
 
 admin.initializeApp()
 
@@ -24,6 +28,18 @@ exports.addMessage = functions.https.onRequest((req, res) => {
         console.log(email)
         message = req.body.message
         console.log(message)
+
+        var data = {
+          from: 'noreply@luckygdev.de',
+          subject: 'Neue Anfrage - EE-Deutschland',
+          text: message,
+          to: email,
+        }
+
+        mailgun.messages().send(data, function(error, body) {
+          console.log(body)
+          console.log(error)
+        })
 
         // push content to database
         return (
@@ -50,4 +66,32 @@ exports.addMessage = functions.https.onRequest((req, res) => {
       res.status(404).send('ERROR')
     }
   })
+})
+
+exports.subscribeUser = functions.database.ref('users/{uid}').onWrite(event => {
+  var user = event.data.val()
+  var { uid } = event.params
+  // Exit if the user was deleted or the user is currently subscribed
+  if (!event.data.exists() || user.subscribed) {
+    return
+  }
+
+  let members = {
+    address: user.email,
+  }
+
+  var listId = 'your mailgun list id'
+
+  // Add the user to our mailgun list
+  return mailgun
+    .lists(listId)
+    .members()
+    .add({ members, subscribed: true }, function(err, body) {
+      if (!err) {
+        return admin
+          .database()
+          .ref('users/' + uid + '/subscribed')
+          .set(true)
+      }
+    })
 })
