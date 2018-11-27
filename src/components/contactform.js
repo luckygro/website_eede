@@ -102,7 +102,7 @@ class Contactform extends React.Component {
       data: { name, email, message },
     } = this.state
 
-    fetch('http://localhost:5001/eede-d8ccf/us-central1/addMessage/', {
+    fetch('https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage', {
       method: 'POST',
       mode: 'cors',
       headers: {

@@ -10,30 +10,40 @@ exports.addMessage = functions.https.onRequest((req, res) => {
   return cors(req, res, () => {
     console.log(req.headers)
     console.log(req.method)
+
+    // process POST
     if (req.method == 'POST') {
-      console.log(req.body)
-      // get content
-      name = req.body.name
-      console.log(name)
-      email = req.body.email
-      console.log(email)
-      message = req.body.message
-      console.log(message)
+      // process json content
+      if (req.headers.contentType == 'application/json') {
+        console.log(req.body)
+        // get content
+        name = req.body.name
+        console.log(name)
+        email = req.body.email
+        console.log(email)
+        message = req.body.message
+        console.log(message)
 
-      // push content to database
-      return (
-        admin
-          .database()
-          .ref('/messages')
-          .push({
-            name: name,
-            email: email,
-            message: message,
-          })
+        // push content to database
+        return (
+          admin
+            .database()
+            .ref('/messages')
+            .push({
+              name: name,
+              email: email,
+              message: message,
+            })
 
-          // send response
-          .then(res.status(201).send('Die E-Mail wurde erfolgreich versendet.'))
-      )
+            // send response
+            .then(
+              res.status(201).send('Die E-Mail wurde erfolgreich versendet.')
+            )
+        )
+      } else {
+        res.status(404).send('ERROR: Content Type not supportet')
+      }
+
       // send error response
     } else {
       res.status(404).send('ERROR')
