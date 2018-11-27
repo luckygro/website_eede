@@ -10,11 +10,12 @@ exports.addMessage = functions.https.onRequest((req, res) => {
   return cors(req, res, () => {
     console.log(req.headers)
     console.log(req.method)
+    console.log(req.headers['content-type'])
 
     // process POST
     if (req.method == 'POST') {
       // process json content
-      if (req.headers.contentType == 'application/json') {
+      if (req.headers['content-type'] == 'application/json') {
         console.log(req.body)
         // get content
         name = req.body.name
@@ -41,7 +42,7 @@ exports.addMessage = functions.https.onRequest((req, res) => {
             )
         )
       } else {
-        res.status(404).send('ERROR: Content Type not supportet')
+        res.status(404).send('ERROR: Content Type not supported')
       }
 
       // send error response
