@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'gatsby'
 
 // styled Components
 const Article = styled.div`
@@ -11,6 +12,15 @@ const Heading = styled.h1`
   font-family: Roboto, Arial;
   font-weight: normal;
 `
+
+const SubHeading = styled.h3`
+  font-size: 28px;
+  color: #e31718;
+  font-family: Roboto, Arial;
+  font-weight: normal;
+  margin-bottom: 0px;
+`
+
 const Button = styled.button`
   display: block;
   color: #fff;
@@ -26,6 +36,23 @@ const Button = styled.button`
     background-color: #666;
   }
 `
+
+const ButtonLink = styled(Link)`
+  display: block;
+  color: #fff;
+  font-size: 1em;
+  padding: 10px;
+  text-decoration: None;
+  margin-top: 30px;
+  background: #999;
+
+  :hover,
+  :focus,
+  :active {
+    background-color: #666;
+  }
+`
+
 const Separator = styled.hr`
   background-color: #bbb;
   height: 1px;
@@ -37,4 +64,4 @@ const Separator = styled.hr`
   margin-bottom: 1em;
 `
 
-export { Article, Heading, Button, Separator }
+export { Article, Heading, SubHeading, Button, ButtonLink, Separator }

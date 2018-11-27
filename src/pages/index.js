@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Img from 'gatsby-image'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import styled from 'styled-components'
+import { SubHeading, ButtonLink } from '../components/layoutStyles'
 
 // Styled Components
 
@@ -42,26 +43,13 @@ const HomeSubtitle = styled.h2`
   margin-bottom: 60px;
 `
 
-const ModuleButton = styled(Link)`
+const ModuleButton = styled(ButtonLink)`
   float: left;
   display: inline-block;
-  color: #e31718;
-  font-size: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #e31718;
-  border-radius: 3px;
-  text-decoration: None;
-  transiton: border-color 1s, color 1s;
   margin-top: 0.5em;
-  cursor: pointer;
-
-  :hover {
-    color: #666;
-    border-color: #666;
-  }
 `
 
-const ModuleTitle = styled.h3`
+const ModuleTitle = styled(SubHeading)`
   margin-top: 0px;
 `
 
