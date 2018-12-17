@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import styled from 'styled-components'
 import { SubHeading, ButtonLink } from '../components/layoutStyles'
+import styled from 'styled-components'
 
 // Styled Components
 
