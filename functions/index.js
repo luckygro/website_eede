@@ -71,31 +71,3 @@ exports.addMessage = functions.https.onRequest((req, res) => {
     }
   })
 })
-
-exports.subscribeUser = functions.database.ref('users/{uid}').onWrite(event => {
-  var user = event.data.val()
-  var { uid } = event.params
-  // Exit if the user was deleted or the user is currently subscribed
-  if (!event.data.exists() || user.subscribed) {
-    return
-  }
-
-  let members = {
-    address: user.email,
-  }
-
-  var listId = 'your mailgun list id'
-
-  // Add the user to our mailgun list
-  return mailgun
-    .lists(listId)
-    .members()
-    .add({ members, subscribed: true }, function(err, body) {
-      if (!err) {
-        return admin
-          .database()
-          .ref('users/' + uid + '/subscribed')
-          .set(true)
-      }
-    })
-})
