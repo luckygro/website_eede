@@ -1,13 +1,14 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-const cors = require('cors')({ origin: true })
-var mailgun = require('mailgun-js')({
-  apiKey: 'XX',
-  domain: 'XX',
-})
-
 admin.initializeApp()
+
+const cors = require('cors')({ origin: true })
+
+const mailgun = require('mailgun-js')({
+  apiKey: functions.config().mailgun.apikey,
+  domain: functions.config().mailgun.domain,
+})
 
 // process contact form
 exports.addMessage = functions.https.onRequest((req, res) => {
@@ -29,10 +30,13 @@ exports.addMessage = functions.https.onRequest((req, res) => {
         message = req.body.message
         console.log(message)
 
+        var mail_text = `Hallo EE-Team,\n\nIhr habt eine neue Nachricht von ${name} (email: ${email}) bekommen.\n\nEr schreibt:\n${message}
+            `
+
         var data = {
-          from: 'noreply@luckygdev.de',
+          from: 'noreply@mg.luckygdev.de',
           subject: 'Neue Anfrage - EE-Deutschland',
-          text: message,
+          text: mail_text,
           to: email,
         }
 
