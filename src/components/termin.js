@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
 import moment from 'moment'
+import Remarkable from 'remarkable'
 import Img from 'gatsby-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -86,6 +86,11 @@ const KursImage = styled(Img)`
 
 // render
 
+var md = new Remarkable({
+  html: true,
+  breaks: true,
+})
+
 class Termin extends React.Component {
   state = {
     status: '',
@@ -103,6 +108,7 @@ class Termin extends React.Component {
     let hasKurs = termin.kurs
     let hasOrt = termin.ort
     let hasContact = termin.schulungsleiter
+    let terminText = md.render(termin.text.text)
 
     return (
       <TerminBox>
@@ -112,7 +118,7 @@ class Termin extends React.Component {
         </TerminHeader>
 
         <TerminContent>
-          <ReactMarkdown source={termin.text.text} />
+          <p dangerouslySetInnerHTML={{ __html: terminText }} />
         </TerminContent>
 
         <TerminInfo>
