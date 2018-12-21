@@ -13,3 +13,4 @@ yarn-error.log
 /functions/.runtimeconfig.json
 
 *.log
+*.cache
