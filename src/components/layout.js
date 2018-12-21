@@ -75,6 +75,12 @@ const HeroImage = styled.div`
   width: 100%;
   max-height: 300px;
   overflow: hidden;
+
+  @media only screen and (min-width: 768px) {
+    img {
+      top: -35% !important;
+    }
+  }
 `
 
 // theme
