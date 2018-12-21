@@ -130,7 +130,7 @@ class Contactform extends React.Component {
     return (
       <form
         id="contactForm"
-        action="http://localhost:5001/eede-d8ccf/us-central1/addMessage"
+        action="https://us-central1-eede-d8ccf.cloudfunctions.net/addMessage"
         onSubmit={this.submit}
       >
         <h3>Senden Sie uns eine E-Mail!</h3>
