@@ -124,10 +124,10 @@ class Termin extends React.Component {
         <TerminInfo>
           <p>
             <Icon icon={faCalendarAlt} />
-            <Moment format="D. MMMM YYYY hh:mm">{termin.dateTime}</Moment> Uhr
+            <Moment format="D. MMMM YYYY HH:mm">{termin.dateTime}</Moment> Uhr
             <br />
             <small>
-              bis <Moment format="D. MMMM YYYY hh:mm">{termin.endDate}</Moment>{' '}
+              bis <Moment format="D. MMMM YYYY HH:mm">{termin.endDate}</Moment>{' '}
               Uhr
             </small>
           </p>
