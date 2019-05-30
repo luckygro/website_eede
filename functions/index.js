@@ -22,33 +22,38 @@ exports.addMessage = functions.https.onRequest((req, res) => {
         email = req.body.email
         message = req.body.message
 
-        var mail_text = `Hallo EE-Team,\n\nIhr habt eine neue Nachricht von ${name} (email: ${email}) bekommen.\n\nEr schreibt:\n${message}
+        var mail_text = `Hallo EE-Team,\n\nIhr habt eine neue Nachricht von ${name} (email: ${email}) bekommen.\n\nEr/Sie schreibt:\n${message}
             `
         var data = {
           from: 'noreply@mg.luckygdev.de',
           subject: 'Neue Anfrage - EE-Deutschland',
           text: mail_text,
-          to: email,
+          to: 'eedeutschland@mac.com',
         }
 
         mailgun.messages().send(data, function(error, body) {})
+        
+        res.status(201).send('Die E-Mail wurde erfolgreich versendet.')
+
 
         // push content to database
-        return (
-          admin
-            .database()
-            .ref('/messages')
-            .push({
-              name: name,
-              email: email,
-              message: message,
-            })
+        if (false) {
+          return (
+            admin
+              .database()
+              .ref('/messages')
+              .push({
+                name: name,
+                email: email,
+                message: message,
+              })
 
-            // send response
-            .then(
-              res.status(201).send('Die E-Mail wurde erfolgreich versendet.')
-            )
-        )
+              // send response
+              .then(
+                res.status(201).send('Die E-Mail wurde erfolgreich versendet.')
+              )
+          )
+        }
       } else {
         res.status(404).send('ERROR: Content Type not supported')
       }
