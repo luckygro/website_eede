@@ -1,5 +1,8 @@
 language: node_js
-env: $FIREBASE_TOKEN
+env:
+  - $FIREBASE_TOKEN
+  - $CONTENTFUL_ACCESS_TOKEN
+  - $CONTENTFUL_SPACE_ID=aoglh7t49eu5
 node_js:
 - node
 script:
