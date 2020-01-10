@@ -32,7 +32,7 @@ export default TerminePage
 
 export const pageQuery = graphql`
   query termineQuery {
-    allContentfulTermine {
+    allContentfulTermine(sort: {order: ASC, fields: dateTime}) {
       edges {
         node {
           title
