@@ -22,12 +22,20 @@ const PersonName = styled.p`
 `
 
 // Render
-const Person = ({ data }) => (
-  <PersonBox>
-    <PersonImg fixed={data.image.fixed} />
-    <PersonName>{data.name}</PersonName>
-  </PersonBox>
-)
+const Person = ({ data }) => {
+
+  if (data.image) {
+    return (
+      <PersonBox>
+        <PersonImg fixed={data.image?.fixed} />
+        <PersonName>{data.name}</PersonName>
+      </PersonBox>
+    )
+  } else {
+    return null
+  }
+  
+}
 
 const List = ({ persons }) => (
   <div>
